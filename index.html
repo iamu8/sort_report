@@ -1,0 +1,99 @@
+!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>氣泡排序法演示</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .array { display: flex; justify-content: center; margin: 20px 0; }
+        .element { width: 40px; height: 40px; margin: 0 5px; display: flex; align-items: center; justify-content: center; background-color: lightblue; border: 1px solid #000; transition: background-color 0.3s; }
+        .highlight { background-color: yellow; }
+        .sorted { background-color: lightgreen; }
+        button { padding: 10px 20px; margin: 10px; }
+        .info { margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <h1>氣泡排序法演示</h1>
+    
+    <div class="info">
+        <h2>操作原理</h2>
+        <p>氣泡排序法是一種簡單的排序演算法。它重複地走訪要排序的數列，一次比較兩個元素，如果它們的順序錯誤就把它們交換過來。走訪數列的工作是重複地進行直到沒有再需要交換，也就是說該數列已經排序完成。</p>
+        
+        <h2>操作過程的步驟</h2>
+        <ol>
+            <li>從數列的第一個元素開始，比較相鄰的兩個元素。</li>
+            <li>如果第一個比第二個大，就交換它們的位置。</li>
+            <li>繼續對每一對相鄰元素做同樣的工作，從開始第一對到結尾的最後一對。</li>
+            <li>重複以上步驟，直到整個數列排序完成。</li>
+        </ol>
+        
+        <h2>複雜度</h2>
+        <ul>
+            <li>時間複雜度：O(n²) - 最壞和平均情況下</li>
+            <li>空間複雜度：O(1) - 原地排序，不需要額外空間</li>
+        </ul>
+    </div>
+    
+    <div class="array" id="array"></div>
+    <button onclick="startSort()">開始排序</button>
+    <button onclick="resetArray()">重置</button>
+    
+    <script>
+        let array = [64, 34, 25, 12, 22, 11, 90];
+        let elements = [];
+        
+        function initArray() {
+            const arrayDiv = document.getElementById('array');
+            arrayDiv.innerHTML = '';
+            elements = [];
+            array.forEach(num => {
+                const div = document.createElement('div');
+                div.className = 'element';
+                div.textContent = num;
+                arrayDiv.appendChild(div);
+                elements.push(div);
+            });
+        }
+        
+        async function bubbleSort() {
+            let n = array.length;
+            for (let i = 0; i < n - 1; i++) {
+                for (let j = 0; j < n - i - 1; j++) {
+                    elements[j].classList.add('highlight');
+                    elements[j + 1].classList.add('highlight');
+                    await sleep(500);
+                    
+                    if (array[j] > array[j + 1]) {
+                        [array[j], array[j + 1]] = [array[j + 1], array[j]];
+                        elements[j].textContent = array[j];
+                        elements[j + 1].textContent = array[j + 1];
+                        await sleep(500);
+                    }
+                    
+                    elements[j].classList.remove('highlight');
+                    elements[j + 1].classList.remove('highlight');
+                }
+                elements[n - i - 1].classList.add('sorted');
+            }
+            elements[0].classList.add('sorted');
+        }
+        
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        
+        function startSort() {
+            bubbleSort();
+        }
+        
+        function resetArray() {
+            array = [64, 34, 25, 12, 22, 11, 90];
+            initArray();
+        }
+        
+        initArray();
+    </script>
+</body>
+</html>

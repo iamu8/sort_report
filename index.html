@@ -4,72 +4,73 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>排序演算法</title>
-
   <style>
     body {
       font-family: Arial, "Microsoft JhengHei", sans-serif;
       margin: 0;
       padding: 0;
-      background: #f4f7fc;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      background: linear-gradient(135deg, #1a3a52 0%, #2c5aa0 50%, #1a3a52 100%);
+      color: #fff;
+      min-height: 100vh;
     }
-
     .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 60px 20px;
       text-align: center;
-      width: 100%;
-      max-width: 400px;
     }
-
     h1 {
-      margin-bottom: 30px;
-      color: #1f3a93;
+      margin-bottom: 16px;
+      font-size: 2.8rem;
+      color: #fff;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      letter-spacing: 2px;
     }
-
-    .btn {
-      display: block;
+    p {
+      margin-bottom: 40px;
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.6;
+    }
+    .links {
+      display: grid;
+      gap: 14px;
+      justify-items: center;
+    }
+    .links a {
+      display: inline-block;
       width: 100%;
-      padding: 14px;
-      margin-bottom: 12px;
-      border: none;
-      border-radius: 10px;
-      background: #2f80ed;
-      color: white;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
+      max-width: 380px;
+      padding: 16px 20px;
       text-decoration: none;
-      transition: 0.2s;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.15);
+      color: white;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      border: 2px solid rgba(255,255,255,0.3);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
-
-    .btn:hover {
-      background: #1c6fce;
-      transform: scale(1.03);
+    .links a:hover {
+      background: rgba(255,255,255,0.25);
+      border-color: rgba(255,255,255,0.6);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
     }
-
-    .btn.special {
-      background: #27ae60;
-    }
-
-    .btn.special:hover {
-      background: #1e8449;
-    }
-
   </style>
 </head>
-
 <body>
   <div class="container">
     <h1>排序演算法</h1>
-
-    <a class="btn" href="bubble_sort.html">氣泡排序</a>
-    <a class="btn" href="insertion_sort.html">插入排序</a>
-    <a class="btn" href="selection_sort.html">選擇排序</a>
-    <a class="btn special" href="SBselsection_sort.html">區段雙向選擇排序</a>
-    <a class="btn" href="merge_sort.html">合併排序</a>
-
+    <p>請點選下方連結，前往各種排序演算法的示範頁面。</p>
+    <div class="links">
+      <a href="bubble_sort.html">氣泡排序 Bubble Sort</a>
+      <a href="insertion_sort.html">插入排序 Insertion Sort</a>
+      <a href="selection_sort.html">選擇排序 Selection Sort</a>
+      <a href="SBselsection_sort.html">區段雙向選擇排序 Segmented Bidirectional Selection Sort</a>
+      <a href="merge_sort.html">合併排序 Merge Sort</a>
+    </div>
   </div>
 </body>
 </html>

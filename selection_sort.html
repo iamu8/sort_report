@@ -1,4 +1,4 @@
-DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-tw">
 <head>
     <meta charset="UTF-8">
@@ -6,57 +6,166 @@ DOCTYPE html>
     <title>選擇排序法</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
+            font-family: Arial, "Microsoft JhengHei", sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1a3a52 0%, #2c5aa0 50%, #1a3a52 100%);
+            color: #fff;
+            min-height: 100vh;
         }
         .container {
-            margin-bottom: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 10px;
+            font-size: 2.4rem;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        h2 {
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            color: rgba(255,255,255,0.95);
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+            padding-bottom: 10px;
+        }
+        .info {
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .info p {
+            color: rgba(255,255,255,0.9);
+            line-height: 1.8;
+            margin: 10px 0;
+        }
+        .info ol, .info ul {
+            color: rgba(255,255,255,0.9);
+            text-align: left;
+            display: inline-block;
+            line-height: 2;
         }
         input[type="text"] {
             width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
+            max-width: 400px;
+            padding: 12px;
+            margin: 15px 0;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 8px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 1rem;
+        }
+        input[type="text"]::placeholder {
+            color: rgba(255,255,255,0.6);
         }
         button {
-            padding: 10px 20px;
-            background-color: #4CAF50;
+            padding: 12px 24px;
+            margin: 10px;
+            background: rgba(255,255,255,0.2);
             color: white;
-            border: none;
+            border: 2px solid rgba(255,255,255,0.5);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
             cursor: pointer;
+            transition: all 0.3s;
         }
         button:hover {
-            background-color: #45a049;
+            background: rgba(255,255,255,0.3);
+            border-color: rgba(255,255,255,0.8);
+            transform: translateY(-2px);
         }
         .result {
             margin-top: 20px;
-            padding: 10px;
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            color: rgba(255,255,255,0.9);
+            border: 2px solid rgba(255,255,255,0.2);
+            line-height: 1.8;
+        }
+        .home-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 24px;
+            background: rgba(255,255,255,0.15);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            border: 2px solid rgba(255,255,255,0.3);
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .home-link:hover {
+            background: rgba(255,255,255,0.25);
+            border-color: rgba(255,255,255,0.6);
+            transform: translateY(-2px);
         }
     </style>
 </head>
 <body>
-    <h1>選擇排序法 (Selection Sort)</h1>
     <div class="container">
-        <label for="arrayInput">輸入數組 (用逗號分隔，例如: 64,25,12,22,11):</label>
+        <h1>選擇排序法 (Selection Sort)</h1>
+        
+        <div class="info">
+            <h2>操作原理</h2>
+            <p>選擇排序法是一種簡單直觀的排序方法。在未排序序列中找到最小（或最大）元素，放到序列的起始位置，然後再從剩餘未排序元素中繼續尋找最小（或最大）元素，放到已排序序列的末尾。</p>
+            
+            <h2>操作過程的步驟</h2>
+            <ol>
+                <li>在未排序序列中找到最小元素。</li>
+                <li>將其與未排序序列的第一個元素交換。</li>
+                <li>在剩餘的未排序序列中再找最小元素。</li>
+                <li>與未排序序列的第一個元素交換。</li>
+                <li>重複以上步驟，直到整個序列排序完成。</li>
+            </ol>
+            
+            <h2>時間與空間複雜度</h2>
+            <ul>
+                <li>時間複雜度（所有情況）：O(n²) - 始終需要進行完全掃描</li>
+                <li>空間複雜度：O(1) - 原地排序，不需要額外空間</li>
+                <li>優點：簡單易實現，交換次數最少</li>
+                <li>缺點：效率較低，性能不如其他排序方法</li>
+            </ul>
+        </div>
+        
+        <h2>互動排序輸入</h2>
+        <label for="arrayInput">輸入數組（以逗號分隔，例如: 64,25,12,22,11）：</label>
         <input type="text" id="arrayInput" placeholder="64,25,12,22,11">
-        <button onclick="selectionSort()">排序</button>
+        <button onclick="selectionSort()">開始排序</button>
+        
+        <div class="result" id="result"></div>
+        
+        <a class="home-link" href="index.html">回首頁</a>
     </div>
-    <div class="result" id="result"></div>
 
     <script>
         function selectionSort() {
             const input = document.getElementById('arrayInput').value;
-            const arr = input.split(',').map(num => parseInt(num.trim())).filter(num => !isNaN(num));
             
-            if (arr.length === 0) {
+            if (!input.trim()) {
                 document.getElementById('result').innerHTML = '請輸入有效的數組';
                 return;
             }
+            
+            const arr = input.split(',').map(num => parseInt(num.trim())).filter(num => !isNaN(num));
+            
+            if (arr.length === 0) {
+                document.getElementById('result').innerHTML = '請輸入有效的數字';
+                return;
+            }
 
-            // 選擇排序實現
+            let resultText = '<h3>排序過程：</h3>';
+            resultText += '<p><strong>原始數組：</strong> [' + input + ']</p>';
+            resultText += '<h3>步驟：</h3>';
+            
             for (let i = 0; i < arr.length - 1; i++) {
                 let minIndex = i;
                 for (let j = i + 1; j < arr.length; j++) {
@@ -64,17 +173,16 @@ DOCTYPE html>
                         minIndex = j;
                     }
                 }
-                // 交換
                 if (minIndex !== i) {
+                    resultText += '<p>第 ' + (i + 1) + ' 步：找到最小值 ' + arr[minIndex] + '，與位置 ' + i + ' 的 ' + arr[i] + ' 交換</p>';
                     [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]];
+                    resultText += '<p style="color: rgba(255,200,0,0.9);">結果：[' + arr.join(', ') + ']</p>';
                 }
             }
 
-            document.getElementById('result').innerHTML = `
-                <h3>排序結果:</h3>
-                <p>原始數組: [${input}]</p>
-                <p>排序後數組: [${arr.join(', ')}]</p>
-            `;
+            resultText += '<h3>最終排序後數組：</h3>';
+            resultText += '<p style="color: rgba(76, 175, 80, 0.9);"><strong>[' + arr.join(', ') + ']</strong></p>';
+            document.getElementById('result').innerHTML = resultText;
         }
     </script>
 </body>

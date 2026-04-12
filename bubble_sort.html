@@ -5,41 +5,149 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>氣泡排序法演示</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        .array { display: flex; justify-content: center; margin: 20px 0; }
-        .element { width: 40px; height: 40px; margin: 0 5px; display: flex; align-items: center; justify-content: center; background-color: lightblue; border: 1px solid #000; transition: background-color 0.3s; }
-        .highlight { background-color: yellow; }
-        .sorted { background-color: lightgreen; }
-        button { padding: 10px 20px; margin: 10px; }
-        .info { margin: 20px 0; }
+        body {
+            font-family: Arial, "Microsoft JhengHei", sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1a3a52 0%, #2c5aa0 50%, #1a3a52 100%);
+            color: #fff;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 10px;
+            font-size: 2.4rem;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        h2 {
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            color: rgba(255,255,255,0.95);
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+            padding-bottom: 10px;
+        }
+        .info {
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .info p {
+            color: rgba(255,255,255,0.9);
+            line-height: 1.8;
+            margin: 10px 0;
+        }
+        .info ol, .info ul {
+            color: rgba(255,255,255,0.9);
+            text-align: left;
+            display: inline-block;
+            line-height: 2;
+        }
+        .array {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+            gap: 5px;
+        }
+        .element {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.5);
+            border-radius: 8px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .highlight {
+            background: rgba(255, 193, 7, 0.8);
+            transform: scale(1.1);
+        }
+        .sorted {
+            background: rgba(76, 175, 80, 0.8);
+        }
+        button {
+            padding: 12px 24px;
+            margin: 10px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.5);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background: rgba(255,255,255,0.3);
+            border-color: rgba(255,255,255,0.8);
+            transform: translateY(-2px);
+        }
+        .home-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 24px;
+            background: rgba(255,255,255,0.15);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            border: 2px solid rgba(255,255,255,0.3);
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .home-link:hover {
+            background: rgba(255,255,255,0.25);
+            border-color: rgba(255,255,255,0.6);
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body>
-    <h1>氣泡排序法演示</h1>
-    
-    <div class="info">
-        <h2>操作原理</h2>
-        <p>氣泡排序法是一種簡單的排序演算法。它重複地走訪要排序的數列，一次比較兩個元素，如果它們的順序錯誤就把它們交換過來。走訪數列的工作是重複地進行直到沒有再需要交換，也就是說該數列已經排序完成。</p>
+    <div class="container">
+        <h1>氣泡排序法 (Bubble Sort)</h1>
         
-        <h2>操作過程的步驟</h2>
-        <ol>
-            <li>從數列的第一個元素開始，比較相鄰的兩個元素。</li>
-            <li>如果第一個比第二個大，就交換它們的位置。</li>
-            <li>繼續對每一對相鄰元素做同樣的工作，從開始第一對到結尾的最後一對。</li>
-            <li>重複以上步驟，直到整個數列排序完成。</li>
-        </ol>
+        <div class="info">
+            <h2>操作原理</h2>
+            <p>氣泡排序法是一種簡單的排序演算法。它重複地走訪要排序的數列，一次比較兩個元素，如果它們的順序錯誤就把它們交換過來。走訪數列的工作是重複地進行直到沒有再需要交換，也就是說該數列已經排序完成。</p>
+            
+            <h2>操作過程的步驟</h2>
+            <ol>
+                <li>從數列的第一個元素開始，比較相鄰的兩個元素。</li>
+                <li>如果第一個比第二個大，就交換它們的位置。</li>
+                <li>繼續對每一對相鄰元素做同樣的工作，從開始第一對到結尾的最後一對。</li>
+                <li>完成一輪後，最大的元素會移動到結尾。</li>
+                <li>重複以上步驟，直到整個數列排序完成。</li>
+            </ol>
+            
+            <h2>時間與空間複雜度</h2>
+            <ul>
+                <li>時間複雜度（最壞）：O(n²) - 需要進行多次完整的數列遍歷</li>
+                <li>時間複雜度（平均）：O(n²)</li>
+                <li>時間複雜度（最佳）：O(n) - 當數列已排序時</li>
+                <li>空間複雜度：O(1) - 原地排序，不需要額外空間</li>
+            </ul>
+        </div>
         
-        <h2>複雜度</h2>
-        <ul>
-            <li>時間複雜度：O(n²) - 最壞和平均情況下</li>
-            <li>空間複雜度：O(1) - 原地排序，不需要額外空間</li>
-        </ul>
+        <h2>視覺化演示</h2>
+        <div class="array" id="array"></div>
+        <div>
+            <button onclick="startSort()">開始排序</button>
+            <button onclick="resetArray()">重置</button>
+        </div>
+        
+        <a class="home-link" href="index.html">回首頁</a>
     </div>
-    
-    <div class="array" id="array"></div>
-    <button onclick="startSort()">開始排序</button>
-    <button onclick="resetArray()">重置</button>
-    
+
     <script>
         let array = [64, 34, 25, 12, 22, 11, 90];
         let elements = [];

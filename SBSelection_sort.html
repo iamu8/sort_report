@@ -6,140 +6,204 @@
     <title>區段雙向選擇排序法</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
+            font-family: Arial, "Microsoft JhengHei", sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1a3a52 0%, #2c5aa0 50%, #1a3a52 100%);
+            color: #fff;
+            min-height: 100vh;
         }
         .container {
-            margin-bottom: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 10px;
+            font-size: 2.4rem;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        h2 {
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            color: rgba(255,255,255,0.95);
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+            padding-bottom: 10px;
+        }
+        .info {
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .info p {
+            color: rgba(255,255,255,0.9);
+            line-height: 1.8;
+            margin: 10px 0;
+        }
+        .info ol, .info ul {
+            color: rgba(255,255,255,0.9);
+            text-align: left;
+            display: inline-block;
+            line-height: 2;
         }
         input[type="text"], input[type="number"] {
             width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
+            max-width: 400px;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 8px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 1rem;
+        }
+        input[type="text"]::placeholder, input[type="number"]::placeholder {
+            color: rgba(255,255,255,0.6);
         }
         button {
-            padding: 10px 20px;
-            background-color: #4CAF50;
+            padding: 12px 24px;
+            margin: 10px;
+            background: rgba(255,255,255,0.2);
             color: white;
-            border: none;
+            border: 2px solid rgba(255,255,255,0.5);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
             cursor: pointer;
+            transition: all 0.3s;
         }
         button:hover {
-            background-color: #45a049;
+            background: rgba(255,255,255,0.3);
+            border-color: rgba(255,255,255,0.8);
+            transform: translateY(-2px);
         }
         .result {
             margin-top: 20px;
-            padding: 10px;
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            color: rgba(255,255,255,0.9);
+            border: 2px solid rgba(255,255,255,0.2);
+            line-height: 1.8;
+        }
+        .home-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 24px;
+            background: rgba(255,255,255,0.15);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            border: 2px solid rgba(255,255,255,0.3);
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .home-link:hover {
+            background: rgba(255,255,255,0.25);
+            border-color: rgba(255,255,255,0.6);
+            transform: translateY(-2px);
         }
     </style>
 </head>
 <body>
-    <h1>區段雙向選擇排序法 (Segmented Bidirectional Selection Sort)</h1>
-
     <div class="container">
-        <label>輸入數組 (用逗號分隔，例如: 64,25,12,22,11):</label>
+        <h1>區段雙向選擇排序法 (Segmented Bidirectional Selection Sort)</h1>
+        
+        <div class="info">
+            <h2>操作原理</h2>
+            <p>區段雙向選擇排序法是一種改進的選擇排序演算法。它將數列分成多個段，對每一段同時從兩端（左右）尋找最小和最大元素，然後從兩端往中間進行排序，提高排序效率。</p>
+            
+            <h2>操作過程的步驟</h2>
+            <ol>
+                <li>將數列分成指定數量的段。</li>
+                <li>對每一段進行初始化，設定左右指針。</li>
+                <li>在當前段中同時找最小元素（放在左端）和最大元素（放在右端）。</li>
+                <li>將最小元素與左端交換，最大元素與右端交換。</li>
+                <li>移動左右指針，重複步驟3-4，直到段內排序完成。</li>
+                <li>對所有段重複以上步驟。</li>
+            </ol>
+            
+            <h2>時間與空間複雜度</h2>
+            <ul>
+                <li>時間複雜度：O(n²) - 仍需比較多次，但段數增加時有所改善</li>
+                <li>空間複雜度：O(1) - 原地排序，不需要額外空間</li>
+                <li>優點：段數增加時，局部性更好</li>
+                <li>缺點：整體複雜度仍為O(n²)</li>
+            </ul>
+        </div>
+        
+        <h2>互動排序輸入</h2>
+        <label for="arrayInput">輸入數組（以逗號分隔，例如: 64,25,12,22,11）：</label>
         <input type="text" id="arrayInput" placeholder="64,25,12,22,11">
-
-        <label>輸入段數:</label>
+        <label for="segmentsInput">輸入段數：</label>
         <input type="number" id="segmentsInput" placeholder="2" min="1">
-
-        <button onclick="runSort()">排序</button>
+        <button onclick="segmentedBidirectionalSelectionSort()">開始排序</button>
+        
+        <div class="result" id="result"></div>
+        
+        <a class="home-link" href="index.html">回首頁</a>
     </div>
 
-    <div class="result" id="result"></div>
-
     <script>
-        function runSort() {
+        function segmentedBidirectionalSelectionSort() {
             const input = document.getElementById('arrayInput').value;
             const segments = parseInt(document.getElementById('segmentsInput').value);
-
-            let arr = input.split(',')
-                .map(num => parseInt(num.trim()))
-                .filter(num => !isNaN(num));
-
-            if (arr.length === 0 || isNaN(segments) || segments < 1) {
+            
+            if (!input.trim() || isNaN(segments) || segments < 1) {
                 document.getElementById('result').innerHTML = '請輸入有效的數組和段數';
                 return;
             }
+            
+            const arr = input.split(',').map(num => parseInt(num.trim())).filter(num => !isNaN(num));
+            
+            if (arr.length === 0) {
+                document.getElementById('result').innerHTML = '請輸入有效的數字';
+                return;
+            }
 
-            const originalArr = [...arr];
             const n = arr.length;
             const segmentSize = Math.ceil(n / segments);
+            let resultText = '<h3>排序過程:</h3>';
+            resultText += '<p><strong>原始數組：</strong> [' + input + ']</p>';
+            resultText += '<p><strong>段數：</strong> ' + segments + '，<strong>每段大小約：</strong> ' + segmentSize + '</p>';
+            resultText += '<h3>分段詳情：</h3>';
 
-            let resultText = `<h3>排序過程</h3>`;
-            resultText += `<p>原始數組: [${originalArr.join(', ')}]</p>`;
-            resultText += `<p>段數: ${segments}，每段大小約: ${segmentSize}</p>`;
-
-            // 🔷 Step 1：分段排序
             for (let seg = 0; seg < segments; seg++) {
                 const start = seg * segmentSize;
                 const end = Math.min(start + segmentSize, n);
-                let segment = arr.slice(start, end);
-
-                resultText += `<p>段 ${seg + 1} 排序前: [${segment.join(', ')}]`;
+                const segment = arr.slice(start, end);
+                resultText += '<p><strong>段 ' + (seg + 1) + ' 開始：</strong> [' + segment.join(', ') + ']</p>';
 
                 let left = 0;
                 let right = segment.length - 1;
-
                 while (left < right) {
                     let minIdx = left;
                     let maxIdx = left;
-
-                    for (let i = left; i <= right; i++) {
+                    for (let i = left + 1; i <= right; i++) {
                         if (segment[i] < segment[minIdx]) minIdx = i;
                         if (segment[i] > segment[maxIdx]) maxIdx = i;
                     }
-
                     [segment[left], segment[minIdx]] = [segment[minIdx], segment[left]];
-
                     if (maxIdx === left) maxIdx = minIdx;
-
                     [segment[right], segment[maxIdx]] = [segment[maxIdx], segment[right]];
-
                     left++;
                     right--;
                 }
 
-                // 放回原陣列
                 for (let i = start; i < end; i++) {
                     arr[i] = segment[i - start];
                 }
 
-                resultText += ` → 排序後: [${segment.join(', ')}]</p>`;
+                resultText += '<p style="color: rgba(255,200,0,0.9);">結果：[' + segment.join(', ') + ']</p>';
             }
 
-            resultText += `<p><strong>分段排序後:</strong> [${arr.join(', ')}]</p>`;
-
-            // 🔷 Step 2：全域雙向選擇排序（關鍵🔥）
-            let left = 0;
-            let right = arr.length - 1;
-
-            while (left < right) {
-                let minIdx = left;
-                let maxIdx = left;
-
-                for (let i = left; i <= right; i++) {
-                    if (arr[i] < arr[minIdx]) minIdx = i;
-                    if (arr[i] > arr[maxIdx]) maxIdx = i;
-                }
-
-                [arr[left], arr[minIdx]] = [arr[minIdx], arr[left]];
-
-                if (maxIdx === left) maxIdx = minIdx;
-
-                [arr[right], arr[maxIdx]] = [arr[maxIdx], arr[right]];
-
-                left++;
-                right--;
-            }
-
-            resultText += `<p><strong>最終排序結果:</strong> [${arr.join(', ')}]</p>`;
-            resultText += `<p>時間複雜度: O(n log n) ~ O(n²)</p>`;
-
+            resultText += '<h3>最終排序後數組：</h3>';
+            resultText += '<p style="color: rgba(76, 175, 80, 0.9);"><strong>[' + arr.join(', ') + ']</strong></p>';
             document.getElementById('result').innerHTML = resultText;
         }
     </script>

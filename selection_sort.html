@@ -1,0 +1,81 @@
+DOCTYPE html>
+<html lang="zh-tw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>選擇排序法</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container {
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>選擇排序法 (Selection Sort)</h1>
+    <div class="container">
+        <label for="arrayInput">輸入數組 (用逗號分隔，例如: 64,25,12,22,11):</label>
+        <input type="text" id="arrayInput" placeholder="64,25,12,22,11">
+        <button onclick="selectionSort()">排序</button>
+    </div>
+    <div class="result" id="result"></div>
+
+    <script>
+        function selectionSort() {
+            const input = document.getElementById('arrayInput').value;
+            const arr = input.split(',').map(num => parseInt(num.trim())).filter(num => !isNaN(num));
+            
+            if (arr.length === 0) {
+                document.getElementById('result').innerHTML = '請輸入有效的數組';
+                return;
+            }
+
+            // 選擇排序實現
+            for (let i = 0; i < arr.length - 1; i++) {
+                let minIndex = i;
+                for (let j = i + 1; j < arr.length; j++) {
+                    if (arr[j] < arr[minIndex]) {
+                        minIndex = j;
+                    }
+                }
+                // 交換
+                if (minIndex !== i) {
+                    [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]];
+                }
+            }
+
+            document.getElementById('result').innerHTML = `
+                <h3>排序結果:</h3>
+                <p>原始數組: [${input}]</p>
+                <p>排序後數組: [${arr.join(', ')}]</p>
+            `;
+        }
+    </script>
+</body>
+</html>

@@ -1,15 +1,152 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-tw">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>合併排序法</title>
+    <style>
+        body {
+            font-family: Arial, "Microsoft JhengHei", sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1a3a52 0%, #2c5aa0 50%, #1a3a52 100%);
+            color: #fff;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 10px;
+            font-size: 2.4rem;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        h2 {
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            color: rgba(255,255,255,0.95);
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+            padding-bottom: 10px;
+        }
+        .info {
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .info p {
+            color: rgba(255,255,255,0.9);
+            line-height: 1.8;
+            margin: 10px 0;
+        }
+        .info ol, .info ul {
+            color: rgba(255,255,255,0.9);
+            text-align: left;
+            display: inline-block;
+            line-height: 2;
+        }
+        input[type="text"] {
+            width: 100%;
+            max-width: 400px;
+            padding: 12px;
+            margin: 15px 0;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 8px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 1rem;
+        }
+        input[type="text"]::placeholder {
+            color: rgba(255,255,255,0.6);
+        }
+        button {
+            padding: 12px 24px;
+            margin: 10px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.5);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background: rgba(255,255,255,0.3);
+            border-color: rgba(255,255,255,0.8);
+            transform: translateY(-2px);
+        }
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            color: rgba(255,255,255,0.9);
+            border: 2px solid rgba(255,255,255,0.2);
+            line-height: 1.8;
+        }
+        .home-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 24px;
+            background: rgba(255,255,255,0.15);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            border: 2px solid rgba(255,255,255,0.3);
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .home-link:hover {
+            background: rgba(255,255,255,0.25);
+            border-color: rgba(255,255,255,0.6);
+            transform: translateY(-2px);
+        }
+    </style>
 </head>
 <body>
-    <h1>合併排序法示範</h1>
-    <p>輸入一個陣列（以逗號分隔）：</p>
-    <input type="text" id="arrayInput" placeholder="例如: 5,3,8,4,2">
-    <button onclick="mergeSortDemo()">排序</button>
-    <p id="result"></p>
+    <div class="container">
+        <h1>合併排序法 (Merge Sort)</h1>
+        
+        <div class="info">
+            <h2>操作原理</h2>
+            <p>合併排序法是一種分治（Divide and Conquer）演算法。它將要排序的序列分成兩個大小相近的子序列，對這兩個子序列分別進行遞歸排序，然後將已排序的子序列合併起來形成最終的排序序列。</p>
+            
+            <h2>操作過程的步驟</h2>
+            <ol>
+                <li>將數列分成兩個大小相近的子序列。</li>
+                <li>對左子序列遞歸進行合併排序。</li>
+                <li>對右子序列遞歸進行合併排序。</li>
+                <li>將兩個已排序的子序列合併成一個有序序列。</li>
+            </ol>
+            
+            <h2>合併過程</h2>
+            <p>比較兩個子序列的首個元素，將較小的元素加入結果序列，並移除該子序列中的該元素。重複此過程直到一個子序列為空，然後將剩餘元素全部加入結果序列。</p>
+            
+            <h2>時間與空間複雜度</h2>
+            <ul>
+                <li>時間複雜度（所有情況）：O(n log n) - 穩定高效</li>
+                <li>空間複雜度：O(n) - 需要額外空間用於合併</li>
+                <li>優點：穩定排序，適合大規模數據</li>
+                <li>缺點：需要額外的空間</li>
+            </ul>
+        </div>
+        
+        <h2>互動排序輸入</h2>
+        <label for="arrayInput">輸入數組（以逗號分隔，例如: 64,25,12,22,11）：</label>
+        <input type="text" id="arrayInput" placeholder="64,25,12,22,11">
+        <button onclick="mergeSortDemo()">開始排序</button>
+        
+        <div class="result" id="result"></div>
+        
+        <a class="home-link" href="index.html">回首頁</a>
+    </div>
 
     <script>
         function merge(left, right) {
@@ -43,9 +180,26 @@
         
         function mergeSortDemo() {
             let input = document.getElementById('arrayInput').value;
-            let arr = input.split(',').map(Number);
+            if (!input.trim()) {
+                document.getElementById('result').innerHTML = '請輸入有效的數組';
+                return;
+            }
+            
+            let arr = input.split(',').map(num => parseInt(num.trim())).filter(num => !isNaN(num));
+            
+            if (arr.length === 0) {
+                document.getElementById('result').innerHTML = '請輸入有效的數字';
+                return;
+            }
+            
             let sortedArr = mergeSort(arr);
-            document.getElementById('result').innerText = '排序後的陣列: ' + sortedArr.join(', ');
+            let resultText = '<h3>排序結果：</h3>';
+            resultText += '<p><strong>原始數組：</strong> [' + input + ']</p>';
+            resultText += '<p></p>';
+            resultText += '<h3>排序後數組：</h3>';
+            resultText += '<p style="color: rgba(76, 175, 80, 0.9);"><strong>[' + sortedArr.join(', ') + ']</strong></p>';
+            resultText += '<p style="margin-top: 20px; color: rgba(255,200,0,0.9);">合併排序已完成！這個演算法通過遞歸分治的方式實現了高效的排序。</p>';
+            document.getElementById('result').innerHTML = resultText;
         }
     </script>
 </body>
